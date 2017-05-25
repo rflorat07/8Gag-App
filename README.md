@@ -1,4 +1,4 @@
-# QR Application Ionic 3
+# 8Gag Application Ionic 3
 
 
 ## Getting Started
@@ -9,7 +9,7 @@
 * Install the ionic CLI (`npm install -g ionic cordova`)
 * Run `ionic serve` in a terminal from the project root.
 
-## Then, to run it, cd into `8Gag-App` and run:
+## Then, to run it, cd into 8Gag-App and run:
 
 ```bash
 $ ionic cordova platform add ios
