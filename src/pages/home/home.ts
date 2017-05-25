@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
+
+import { SubirPage } from './../subir/subir';
+
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 @Component({
   selector: 'page-home',
@@ -7,8 +11,14 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  posts: FirebaseListObservable<any[]>;
 
+  constructor(public modalCtrl: ModalController, private afDB: AngularFireDatabase) {
+    this.posts = afDB.list('/posts');
+  }
+
+  mostrar_modal() {
+    this.modalCtrl.create(SubirPage).present();
   }
 
 }
