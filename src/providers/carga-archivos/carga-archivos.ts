@@ -11,7 +11,7 @@ export class CargaArchivosProvider {
   private POSTS: string = "posts";
 
   imagenes: any[] = [];
-  lastKey: string = null;
+  lastKey: string = undefined;
 
   constructor(public afDB: AngularFireDatabase, public toastCtrl: ToastController) { }
 

@@ -1,9 +1,11 @@
+
 import { Component } from '@angular/core';
 import { ModalController } from 'ionic-angular';
 
 import { SubirPage } from './../subir/subir';
 
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+//Providers
+import { CargaArchivosProvider } from './../../providers/carga-archivos/carga-archivos';
 
 @Component({
   selector: 'page-home',
@@ -11,14 +13,24 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 })
 export class HomePage {
 
-  posts: FirebaseListObservable<any[]>;
+  hayMas: boolean = true;
 
-  constructor(public modalCtrl: ModalController, private afDB: AngularFireDatabase) {
-    this.posts = afDB.list('/posts');
+  constructor(public modalCtrl: ModalController, private cargaArchivosProvider: CargaArchivosProvider) {
+    this.cargaArchivosProvider.cargar_imagenes().then();
   }
 
   mostrar_modal() {
     this.modalCtrl.create(SubirPage).present();
+  }
+
+  doInfinite(infiniteScroll: any) {
+    console.log('Siguientes...');
+
+    this.cargaArchivosProvider.cargar_imagenes()
+      .then((existenMas: boolean) => {
+        infiniteScroll.complete();
+        this.hayMas = existenMas;
+      });
   }
 
 }
