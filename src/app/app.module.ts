@@ -9,6 +9,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Camera } from '@ionic-native/camera';
+import { Facebook } from '@ionic-native/facebook';
 
 
 //Page
@@ -19,12 +20,14 @@ import { SubirPage } from './../pages/subir/subir';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { firebaseConfig } from './../config/firebase.config';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 //Pipes 
 import { PlaceholderPipe } from '../pipes/placeholder/placeholder';
 
 //Providers
 import { CargaArchivosProvider } from '../providers/carga-archivos/carga-archivos';
+import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,8 @@ import { CargaArchivosProvider } from '../providers/carga-archivos/carga-archivo
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -47,11 +51,13 @@ import { CargaArchivosProvider } from '../providers/carga-archivos/carga-archivo
   ],
   providers: [
     Camera,
+    Facebook,
     StatusBar,
     ImagePicker,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    CargaArchivosProvider
+    CargaArchivosProvider,
+    AuthServiceProvider
   ]
 })
 export class AppModule { }

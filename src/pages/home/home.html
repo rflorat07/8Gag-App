@@ -3,6 +3,12 @@
     <ion-title>
       8Gag
     </ion-title>
+
+    <ion-buttons end>
+      <button ion-button *ngIf="!authServiceProvider.authenticated" (click)="signInWithFacebook()">Ingresar</button>
+      <button ion-button *ngIf="authServiceProvider.authenticated" (click)="signOut()">Salir</button>
+    </ion-buttons>
+
   </ion-navbar>
 </ion-header>
 
@@ -30,7 +36,7 @@
 
   </ion-card>
 
-  <ion-fab right bottom>
+  <ion-fab right bottom *ngIf="authServiceProvider.authenticated">
     <button ion-fab color="danger" (click)="mostrar_modal()">
      <ion-icon name="add"></ion-icon>
     </button>
