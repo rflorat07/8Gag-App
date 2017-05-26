@@ -10,6 +10,7 @@ import { ImagePicker } from '@ionic-native/image-picker';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Camera } from '@ionic-native/camera';
 import { Facebook } from '@ionic-native/facebook';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 
 //Page
@@ -55,6 +56,7 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     StatusBar,
     ImagePicker,
     SplashScreen,
+    SocialSharing,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     CargaArchivosProvider,
     AuthServiceProvider

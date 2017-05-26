@@ -1,7 +1,7 @@
-
-
 import { Component } from '@angular/core';
-import { ModalController } from 'ionic-angular';
+import { ModalController, ToastController } from 'ionic-angular';
+
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { SubirPage } from './../subir/subir';
 
@@ -20,12 +20,24 @@ export class HomePage {
   constructor(
     public modalCtrl: ModalController,
     private cargaArchivosProvider: CargaArchivosProvider,
-    private authServiceProvider: AuthServiceProvider) {
+    private authServiceProvider: AuthServiceProvider,
+    private socialSharing: SocialSharing,
+    private toastCtrl: ToastController) {
     this.cargaArchivosProvider.cargar_imagenes().then();
   }
 
   mostrar_modal() {
     this.modalCtrl.create(SubirPage).present();
+  }
+
+  compartir(post: any) {
+    this.socialSharing.shareViaFacebook(post.titulo, post.img).then(() => {
+      // Sharing via Facebook is possible
+      this.mostrar_toast("Compartido correctamente");
+    }).catch((error) => {
+      // Sharing via Facebook is not possible
+      this.mostrar_toast("Error: " + error);
+    });
   }
 
   signInWithFacebook() {
@@ -37,10 +49,6 @@ export class HomePage {
     this.authServiceProvider.signOut();
   }
 
-  private onSignINSuccess(res: any): void {
-    console.log("Facebook nombre ",res.user.displayName);
-
-  }
 
   doInfinite(infiniteScroll: any) {
     console.log('Siguientes...');
@@ -50,6 +58,18 @@ export class HomePage {
         infiniteScroll.complete();
         this.hayMas = existenMas;
       });
+  }
+
+  private onSignINSuccess(res: any): void {
+    console.log("Facebook nombre ", res.user.displayName);
+
+  }
+
+  private mostrar_toast(texto: string) {
+    this.toastCtrl.create({
+      message: texto,
+      duration: 2500
+    }).present();
   }
 
 }

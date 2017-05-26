@@ -95,4 +95,5 @@
         <variable name="APP_ID" value="477478565923988" />
         <variable name="APP_NAME" value="8gag-udemy" />
     </plugin>
+    <plugin name="cordova-plugin-x-socialsharing" spec="~5.1.8" />
 </widget>
